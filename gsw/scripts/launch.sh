@@ -76,16 +76,18 @@ gnome-terminal --tab --title='Sample Sim'         -- $SIM_BIN/nos3-single-simula
 ##cmake .. -DDEBUG=1 && make -j2
 ##gnome-terminal --window-with-profile=KeepOpen --title="CryptoLib" -- $BASE_DIR/components/cryptolib/build/bin/standalone
 
-echo "COSMOS Ground Station..."
+# echo "COSMOS Ground Station..."
 #cd $BASE_DIR/gsw/cosmos
 #export MISSION_NAME=$(echo "NOS3")
 #export PROCESSOR_ENDIANNESS=$(echo "LITTLE_ENDIAN")
 #ruby Launcher -c nos3_launcher.txt --system nos3_system.txt &
-pidof firefox > /dev/null
-if [ $? -eq 1 ]
-then
-    firefox localhost:2900 &
-fi
+# pidof firefox > /dev/null
+# if [ $? -eq 1 ]
+# then
+#     firefox localhost:2900 &
+# fi
+
+echo "AIT Ground Station..."
 
 sleep 5
 

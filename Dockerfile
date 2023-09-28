@@ -104,24 +104,14 @@ RUN cd /opt/nos3/42 \
     && make \
     && ln -s /usr/lib/libnos_engine_client.so /usr/lib/libnos_engine_client_cxx11.so
 
-# Set working directory
-WORKDIR /home/nos3
+# Copy local files to the working directory in the container 
+# Name directory /home/nos3/Desktop/github-nos3
+COPY . /home/nos3/Desktop/github-nos3
 
-# Clone the NOS3 repository
-RUN git clone https://github.com/nasa/nos3.git Desktop/github-nos3
-
-# Check the contents of the directory to make sure the clone was successful
-RUN ls -al /home/nos3/Desktop/github-nos3 || exit 1
+# Set the working directory to the directory where the files were copied
 WORKDIR /home/nos3/Desktop/github-nos3
 
-# Update the submodules
-RUN git submodule init
-RUN git submodule update
-
-# Give execute permissions to the script
-RUN chmod +x /home/nos3/Desktop/github-nos3/gsw/scripts/create_cosmos_gem.sh
-RUN chmod +x /home/nos3/Desktop/github-nos3/gsw/scripts/fsw_respawn.sh
-
-# Build NOS3
-#RUN make
-#RUN make launch
+# Copy entrypoint script entrypoint.sh to the container and run it
+COPY entrypoint.sh /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
